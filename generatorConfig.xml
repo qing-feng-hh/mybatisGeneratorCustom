@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<context id="testTables" targetRuntime="MyBatis3">
+
+		<!--默认配置-->
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+
+		<!--修改账号密码及数据库  mysql-->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+						connectionURL="jdbc:mysql://192.168.0.60:3306/dbname"
+						userId="username"
+						password="password">
+		</jdbcConnection>
+
+		<!--oracle-->
+		<!-- <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+			userId="scott"
+			password="wcy675600920">
+		</jdbcConnection> -->
+
+		<!-- 默认配置  默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+
+
+		<!-- targetProject:指定需要修改生成PO类的位置 -->
+		<javaModelGenerator targetPackage="com.ge.servername.bean"
+			targetProject=".\src">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+        <!-- targetProject:指定需要修改mapper接口生成的位置 -->
+		<sqlMapGenerator targetPackage="com.ge.servername.mapper"
+			targetProject=".\src">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<!-- targetPackage：指定需要修改mapper映射文件生成的位置-->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.greatedu.oa.xml"
+			targetProject=".\src">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<!--手动添加表名及实体类名  实体类采用驼峰式命名代替- -->
+		<!--<table tableName="pay_account" domainObjectName="PayAccount"></table>-->
+		<table tableName="tablename" domainObjectName="beanname"></table>
+
+
+		<!--&lt;!&ndash; 从数据库返回的值被清理前后的空格 &ndash;&gt;-->
+		<!--<property name="trimStrings" value="true" />-->
+
+
+
+
+		<!-- 有些表的字段需要指定java类型
+		 <table schema="" tableName="">
+			<columnOverride column="" javaType="" />
+		</table> -->
+	</context>
+</generatorConfiguration>
